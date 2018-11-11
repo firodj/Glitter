@@ -33,9 +33,23 @@ include_directories(Glitter/Headers/
                     Glitter/Vendor/glad/include/
                     Glitter/Vendor/glfw/include/
                     Glitter/Vendor/glm/
-                    Glitter/Vendor/stb/)
+                    Glitter/Vendor/stb/
+                    Glitter/Vendor/imgui/
+                    Glitter/Vendor/imgui/examples/)
 
-file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
+file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c
+                          Glitter/Vendor/imgui/imgui.cpp
+                          Glitter/Vendor/imgui/imgui.h
+                          Glitter/Vendor/imgui/imgui_internal.h
+                          Glitter/Vendor/imgui/imgui_draw.cpp
+                          Glitter/Vendor/imgui/imgui_widgets.cpp
+                          Glitter/Vendor/imgui/imconfig.h
+                          Glitter/Vendor/imgui/examples/imgui_impl_opengl3.cpp
+                          Glitter/Vendor/imgui/examples/imgui_impl_opengl3.h
+                          Glitter/Vendor/imgui/examples/imgui_impl_glfw.cpp
+                          Glitter/Vendor/imgui/examples/imgui_impl_glfw.h
+                          Glitter/Vendor/imgui/imgui_demo.cpp
+)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.hpp)
 file(GLOB PROJECT_SOURCES Glitter/Sources/*.cpp)
 file(GLOB PROJECT_SHADERS Glitter/Shaders/*.comp
@@ -54,7 +68,8 @@ source_group("Sources" FILES ${PROJECT_SOURCES})
 source_group("Vendors" FILES ${VENDORS_SOURCES})
 
 add_definitions(-DGLFW_INCLUDE_NONE
-                -DPROJECT_SOURCE_DIR=\"${PROJECT_SOURCE_DIR}\")
+                -DPROJECT_SOURCE_DIR=\"${PROJECT_SOURCE_DIR}\"
+                -DIMGUI_IMPL_OPENGL_LOADER_GLAD)
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS}
                                ${PROJECT_SHADERS} ${PROJECT_CONFIGS}
                                ${VENDORS_SOURCES})
